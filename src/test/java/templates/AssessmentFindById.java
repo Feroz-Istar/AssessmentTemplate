@@ -6,6 +6,7 @@ import org.hibernate.Transaction;
 import com.Assessment;
 import com.Question;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import util.HibernateSessionFactory;
 
@@ -19,7 +20,12 @@ public class AssessmentFindById {
 		tx = session.beginTransaction();
 		Integer assid = 8;
         Assessment assessment =  (Assessment) session.get(Assessment.class, 8);
-        System.out.println(new Gson().toJson(assessment));
+       
+
+		Gson gson = new GsonBuilder()
+                .excludeFieldsWithoutExposeAnnotation()
+                .create();
+        System.out.println(gson.toJson(assessment));
 //        System.out.println(assessment.getQuestions().size());
 //        	for(Question e : assessment.getQuestions()) {
 //        		System.out.println(e.getOptions().size());
