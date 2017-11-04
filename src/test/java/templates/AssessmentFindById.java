@@ -8,6 +8,7 @@ import com.Question;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import dao.AssessmentDAO;
 import util.HibernateSessionFactory;
 
 public class AssessmentFindById {
@@ -19,7 +20,7 @@ public class AssessmentFindById {
 		session = HibernateSessionFactory.getSession();
 		tx = session.beginTransaction();
 		Integer assid = 8;
-        Assessment assessment =  (Assessment) session.get(Assessment.class, 8);
+        Assessment assessment = new AssessmentDAO().findById(8);
        
 
 		Gson gson = new GsonBuilder()
