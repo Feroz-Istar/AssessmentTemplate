@@ -1,5 +1,6 @@
 package dao;
 
+import dao.BaseHibernateDAO;
 import java.util.List;
 import java.util.Set;
 import org.hibernate.LockOptions;
@@ -26,6 +27,8 @@ public class QuestionDAO extends BaseHibernateDAO {
 	// property constants
 	public static final String INSTRUCTIONS = "instructions";
 	public static final String QUESTION_TEXT = "questionText";
+	public static final String ORDER_ID = "orderId";
+	public static final String QUESTION_TYPE = "questionType";
 
 	public void save(Question transientInstance) {
 		log.debug("saving Question instance");
@@ -92,6 +95,14 @@ public class QuestionDAO extends BaseHibernateDAO {
 
 	public List<Question> findByQuestionText(Object questionText) {
 		return findByProperty(QUESTION_TEXT, questionText);
+	}
+
+	public List<Question> findByOrderId(Object orderId) {
+		return findByProperty(ORDER_ID, orderId);
+	}
+
+	public List<Question> findByQuestionType(Object questionType) {
+		return findByProperty(QUESTION_TYPE, questionType);
 	}
 
 	public List findAll() {

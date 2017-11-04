@@ -1,7 +1,5 @@
 package com;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,107 +7,81 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
+import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
-import com.google.gson.annotations.Expose;
-
+/**
+ * Option entity. @author MyEclipse Persistence Tools
+ */
 @Entity
+@Table(name = "option", schema = "public")
 
-public class Option  implements Serializable{
-	@Expose
-	private Integer id;
-	@Expose
-	private Integer order_id;
-	@Expose
-	private String  text;
+public class Option implements java.io.Serializable {
+
+	// Fields
+
+	private Integer optionId;
 	private Question question;
-	@Expose
-	private String image_url;
-	
+	private Integer orderId;
+	private String text;
+
+	// Constructors
+
+	/** default constructor */
 	public Option() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
-	
-	
-	
-	
 
-
-
-
-	public Option(Integer order_id, String text) {
-		super();
-		this.order_id = order_id;
-		this.text = text;
-	}
-	
-	
-	
-	public Option(Integer order_id, String text, Question question, String image_url) {
-		super();
-		this.order_id = order_id;
-		this.text = text;
+	/** full constructor */
+	public Option(Question question, Integer orderId, String text) {
 		this.question = question;
-		this.image_url = image_url;
+		this.orderId = orderId;
+		this.text = text;
 	}
 
-
-
-
-
-
-
-
+	// Property accessors
 	@GenericGenerator(name = "generator", strategy = "increment")
 	@Id
 	@GeneratedValue(generator = "generator")
-	@Column(name = "option_id", unique = true, nullable = false)
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	
-	@Column(name = "order_id", unique = false, nullable = false)
-	public Integer getOrder_id() {
-		return order_id;
-	}
-	public void setOrder_id(Integer order_id) {
-		this.order_id = order_id;
-	}
-	
-	
-	@Column(name = "text", unique = false, nullable = false)
 
-	public String getText() {
-		return text;
+	@Column(name = "option_id", unique = true, nullable = false)
+
+	public Integer getOptionId() {
+		return this.optionId;
 	}
-	public void setText(String text) {
-		this.text = text;
+
+	public void setOptionId(Integer optionId) {
+		this.optionId = optionId;
 	}
-	
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "question_id", nullable = false)
+
 	public Question getQuestion() {
-		return question;
+		return this.question;
 	}
+
 	public void setQuestion(Question question) {
 		this.question = question;
 	}
-	
-	@Column(name = "image_url", unique = false, nullable = false)
-	public String getImage_url() {
-		return image_url;
+
+	@Column(name = "order_id", nullable = false)
+
+	public Integer getOrderId() {
+		return this.orderId;
 	}
-	public void setImage_url(String image_url) {
-		this.image_url = image_url;
+
+	public void setOrderId(Integer orderId) {
+		this.orderId = orderId;
 	}
-	
-	
-	
-	
+
+	@Column(name = "text", nullable = false)
+
+	public String getText() {
+		return this.text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
+
 }

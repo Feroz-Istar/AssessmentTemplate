@@ -1,110 +1,94 @@
-	package com;
+package com;
 
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.persistence.JoinColumn;
-
 import org.hibernate.annotations.GenericGenerator;
 
-import com.google.gson.annotations.Expose;
-
+/**
+ * Assessment entity. @author MyEclipse Persistence Tools
+ */
 @Entity
-public class Assessment implements Serializable {
-	
-	@Expose
-	private Integer id;
-	@Expose
+@Table(name = "assessment", schema = "public")
+
+public class Assessment implements java.io.Serializable {
+
+	// Fields
+
+	private Integer assessmentId;
+	private String imageUrl;
 	private String type;
-	@Expose
 	private Set<Question> questions = new HashSet<Question>(0);
-	@Expose
-	private String image_url;
-	
+
+	// Constructors
+
+	/** default constructor */
 	public Assessment() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
-	
-	
-	
-	
-	public Assessment(String type, String image_url) {
-		super();
+
+	/** minimal constructor */
+	public Assessment(String imageUrl, String type) {
+		this.imageUrl = imageUrl;
 		this.type = type;
-		this.image_url = image_url;
 	}
 
-
-
-
-	public Assessment(String type, Set<Question> questions, String image_url) {
-		super();
-		this.type = type;
-		this.questions = questions;
-		this.image_url = image_url;
-	}
-	public Assessment(String type, Set<Question>  questions) {
-		super();
+	/** full constructor */
+	public Assessment(String imageUrl, String type, Set<Question> questions) {
+		this.imageUrl = imageUrl;
 		this.type = type;
 		this.questions = questions;
 	}
-	
+
+	// Property accessors
 	@GenericGenerator(name = "generator", strategy = "increment")
 	@Id
 	@GeneratedValue(generator = "generator")
+
 	@Column(name = "assessment_id", unique = true, nullable = false)
-	public Integer getId() {
-		return id;
+
+	public Integer getAssessmentId() {
+		return this.assessmentId;
 	}
-	public void setId(Integer id) {
-		this.id = id;
+
+	public void setAssessmentId(Integer assessmentId) {
+		this.assessmentId = assessmentId;
 	}
-	
-	@Column(name = "type", unique = false, nullable = false)
+
+	@Column(name = "image_url", nullable = false)
+
+	public String getImageUrl() {
+		return this.imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+
+	@Column(name = "type", nullable = false)
+
 	public String getType() {
-		return type;
+		return this.type;
 	}
+
 	public void setType(String type) {
 		this.type = type;
 	}
-	
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinTable(name = "assessment_question", joinColumns = {
-			@JoinColumn(name = "assessment_id", nullable = false, updatable = false) },
-			inverseJoinColumns = { @JoinColumn(name = "question_id",
-					nullable = false, updatable = false) })
-	public Set<Question>  getQuestions() {
-		return questions;
-	}
-	public void setQuestions(Set<Question>  question) {
-		this.questions = question;
+
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "assessments")
+
+	public Set<Question> getQuestions() {
+		return this.questions;
 	}
 
-
-
-	@Column(name = "image_url", unique = false, nullable = false)
-	public String getImage_url() {
-		return image_url;
+	public void setQuestions(Set<Question> questions) {
+		this.questions = questions;
 	}
 
-
-
-
-	public void setImage_url(String image_url) {
-		this.image_url = image_url;
-	}
-
-	
-	
 }

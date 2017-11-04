@@ -1,5 +1,6 @@
 package dao;
 
+import dao.BaseHibernateDAO;
 import java.util.List;
 import org.hibernate.LockOptions;
 import org.hibernate.Query;
@@ -23,7 +24,6 @@ import com.Option;
 public class OptionDAO extends BaseHibernateDAO {
 	private static final Logger log = LoggerFactory.getLogger(OptionDAO.class);
 	// property constants
-	public static final String IMAGE_URL = "imageUrl";
 	public static final String ORDER_ID = "orderId";
 	public static final String TEXT = "text";
 
@@ -84,10 +84,6 @@ public class OptionDAO extends BaseHibernateDAO {
 			log.error("find by property name failed", re);
 			throw re;
 		}
-	}
-
-	public List<Option> findByImageUrl(Object imageUrl) {
-		return findByProperty(IMAGE_URL, imageUrl);
 	}
 
 	public List<Option> findByOrderId(Object orderId) {

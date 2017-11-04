@@ -1,5 +1,6 @@
 package dao;
 
+import dao.BaseHibernateDAO;
 import java.util.List;
 import org.hibernate.LockOptions;
 import org.hibernate.Query;
