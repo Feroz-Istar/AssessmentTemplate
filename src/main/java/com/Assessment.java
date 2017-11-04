@@ -24,7 +24,6 @@ public class Assessment implements java.io.Serializable {
 
 	private Integer assessmentId;
 	private String imageUrl;
-	private String type;
 	private Set<Question> questions = new HashSet<Question>(0);
 
 	// Constructors
@@ -34,15 +33,13 @@ public class Assessment implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Assessment(String imageUrl, String type) {
+	public Assessment(String imageUrl) {
 		this.imageUrl = imageUrl;
-		this.type = type;
 	}
 
 	/** full constructor */
-	public Assessment(String imageUrl, String type, Set<Question> questions) {
+	public Assessment(String imageUrl, Set<Question> questions) {
 		this.imageUrl = imageUrl;
-		this.type = type;
 		this.questions = questions;
 	}
 
@@ -69,16 +66,6 @@ public class Assessment implements java.io.Serializable {
 
 	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
-	}
-
-	@Column(name = "type", nullable = false)
-
-	public String getType() {
-		return this.type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
 	}
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "assessments")

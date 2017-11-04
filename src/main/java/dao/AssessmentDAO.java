@@ -91,10 +91,6 @@ public class AssessmentDAO extends BaseHibernateDAO {
 		return findByProperty(IMAGE_URL, imageUrl);
 	}
 
-	public List<Assessment> findByType(Object type) {
-		return findByProperty(TYPE, type);
-	}
-
 	public List findAll() {
 		log.debug("finding all Assessment instances");
 		try {
