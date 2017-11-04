@@ -62,7 +62,7 @@ public class AssessmentTest {
 			 Set<Answer> answers = new HashSet<Answer>(
 						0);
 			for(int k=0;k<5;k++) {
-				Option option = new Option(getRandomOrderId(order_id),factory.streetName(),que);
+				Option option = new Option(getRandomOrderId(order_id),factory.streetName(),que,getRandomChestItem(image_url));
 				options.add(option);
 				Answer answer = new Answer(getRandomOrderId(order_id),factory.streetName(),que);
 				answers.add(answer);

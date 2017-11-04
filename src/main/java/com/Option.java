@@ -24,23 +24,44 @@ public class Option  implements Serializable{
 	@Expose
 	private String  text;
 	private Question question;
+	@Expose
+	private String image_url;
+	
 	public Option() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+	
+	
+
+
+
+
 	public Option(Integer order_id, String text) {
 		super();
 		this.order_id = order_id;
 		this.text = text;
 	}
 	
-	public Option(Integer order_id, String text,Question question) {
+	
+	
+	public Option(Integer order_id, String text, Question question, String image_url) {
 		super();
 		this.order_id = order_id;
 		this.text = text;
 		this.question = question;
+		this.image_url = image_url;
 	}
-	
+
+
+
+
+
+
+
+
 	@GenericGenerator(name = "generator", strategy = "increment")
 	@Id
 	@GeneratedValue(generator = "generator")
@@ -79,6 +100,15 @@ public class Option  implements Serializable{
 	public void setQuestion(Question question) {
 		this.question = question;
 	}
+	
+	@Column(name = "image_url", unique = false, nullable = false)
+	public String getImage_url() {
+		return image_url;
+	}
+	public void setImage_url(String image_url) {
+		this.image_url = image_url;
+	}
+	
 	
 	
 	
