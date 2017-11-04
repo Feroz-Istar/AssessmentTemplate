@@ -52,11 +52,11 @@ public class AssessmentTest {
 		for(int p=0; p<10;p++) {
 			tx = session.beginTransaction();
 
-		Assessment assessment = new Assessment(getRandomType(type),getRandomChestItem(image_url));
+		Assessment assessment = new Assessment(getRandomChestItem(image_url));
 		 Set<Question> questions = new HashSet<Question>(0);
 
 		for(int i=0; i <10; i++) {
-			Question que = new Question(factory.paragraph(),factory.sentence());
+			Question que = new Question(factory.paragraph(),factory.sentence(),getRandomType(type),getRandomOrderId(order_id));
 			 Set<Option> options = new HashSet<Option>(
 						0);
 			 Set<Answer> answers = new HashSet<Answer>(
